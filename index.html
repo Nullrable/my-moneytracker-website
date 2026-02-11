@@ -138,6 +138,95 @@
             height: 22px;
         }
 
+        /* Language Selector */
+        .lang-selector {
+            position: relative;
+        }
+
+        .lang-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .lang-btn:hover {
+            background: var(--bg-tertiary);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .lang-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .lang-dropdown {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            min-width: 180px;
+            max-height: 320px;
+            overflow-y: auto;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.2s;
+            z-index: 1001;
+        }
+
+        .lang-selector:hover .lang-dropdown,
+        .lang-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .lang-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .lang-option:hover {
+            background: var(--bg-tertiary);
+            color: var(--primary);
+        }
+
+        .lang-option.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .lang-option .lang-flag {
+            font-size: 18px;
+        }
+
+        .lang-option .lang-name {
+            flex: 1;
+        }
+
         /* Buttons */
         .btn {
             display: inline-flex;
@@ -663,6 +752,72 @@
                         <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
                     </svg>
                 </button>
+                <div class="lang-selector">
+                    <button class="lang-btn" aria-label="Select language">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10"/>
+                        </svg>
+                        <span id="current-lang">EN</span>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </button>
+                    <div class="lang-dropdown">
+                        <button class="lang-option active" data-lang="en">
+                            <span class="lang-flag">&#127468;&#127463;</span>
+                            <span class="lang-name">English</span>
+                        </button>
+                        <button class="lang-option" data-lang="zhHant">
+                            <span class="lang-flag">&#127471;&#127477;</span>
+                            <span class="lang-name">繁體中文</span>
+                        </button>
+                        <button class="lang-option" data-lang="zhHans">
+                            <span class="lang-flag">&#127465;&#127466;</span>
+                            <span class="lang-name">简体中文</span>
+                        </button>
+                        <button class="lang-option" data-lang="ja">
+                            <span class="lang-flag">&#127471;&#127485;</span>
+                            <span class="lang-name">日本語</span>
+                        </button>
+                        <button class="lang-option" data-lang="ko">
+                            <span class="lang-flag">&#127472;&#127479;</span>
+                            <span class="lang-name">한국어</span>
+                        </button>
+                        <button class="lang-option" data-lang="fr">
+                            <span class="lang-flag">&#127467;&#127479;</span>
+                            <span class="lang-name">Français</span>
+                        </button>
+                        <button class="lang-option" data-lang="de">
+                            <span class="lang-flag">&#127465;&#127466;</span>
+                            <span class="lang-name">Deutsch</span>
+                        </button>
+                        <button class="lang-option" data-lang="es">
+                            <span class="lang-flag">&#127466;&#127479;</span>
+                            <span class="lang-name">Español</span>
+                        </button>
+                        <button class="lang-option" data-lang="pt">
+                            <span class="lang-flag">&#127466;&#127477;</span>
+                            <span class="lang-name">Português</span>
+                        </button>
+                        <button class="lang-option" data-lang="it">
+                            <span class="lang-flag">&#127470;&#127481;</span>
+                            <span class="lang-name">Italiano</span>
+                        </button>
+                        <button class="lang-option" data-lang="vi">
+                            <span class="lang-flag">&#127471;&#127484;</span>
+                            <span class="lang-name">Tiếng Việt</span>
+                        </button>
+                        <button class="lang-option" data-lang="id">
+                            <span class="lang-flag">&#127470;&#127462;</span>
+                            <span class="lang-name">Bahasa Indonesia</span>
+                        </button>
+                        <button class="lang-option" data-lang="ar">
+                            <span class="lang-flag">&#127462;&#127484;</span>
+                            <span class="lang-name">العربية</span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -920,6 +1075,876 @@
                         behavior: 'smooth',
                         block: 'start'
                     });
+                }
+            });
+        });
+
+        // Language translations
+        const translations = {
+            en: {
+                badge: "FREE",
+                badgeSub: "No Subscription Required",
+                heroTitle: "Master Your Finances<br>With Ease",
+                heroDesc: "A beautiful, privacy-first expense tracker that helps you understand your spending habits and save more money.",
+                heroCTA: "Download on the",
+                heroCTA2: "App Store",
+                heroStat1: "100%",
+                heroStat1Label: "Free",
+                heroStat2: "Private",
+                heroStat2Label: "Your Data Stays Yours",
+                heroStat3: "2",
+                heroStat3Label: "Platforms",
+                heroStat4: "10+",
+                heroStat4Label: "Languages",
+                featuresTitle: "Everything You Need",
+                featuresDesc: "Powerful tools designed to help you take control of your financial life",
+                feature1Title: "Easy Transaction Tracking",
+                feature1Desc: "Quickly record income and expenses. Add transactions in seconds with smart categorization and paste from clipboard.",
+                feature2Title: "Beautiful Analytics",
+                feature2Desc: "Visualize your spending with stunning charts. See weekly, monthly, and yearly trends to understand your habits.",
+                feature3Title: "Secure & Private",
+                feature3Desc: "Protect your data with Face ID, Touch ID, or PIN. Your financial information stays completely private.",
+                feature4Title: "Multi-Language",
+                feature4Desc: "Available in over 10 languages. Switch instantly to use the app in your preferred language.",
+                feature5Title: "Beautiful Themes",
+                feature5Desc: "Choose light mode, dark mode, or let it follow your system preference. Beautifully designed for any time.",
+                feature6Title: "Multi-Account",
+                feature6Desc: "Manage all your accounts in one place. Cash, bank accounts, credit cards, and more.",
+                whyTitle: "Why Money Tracker?",
+                whyDesc: "Designed with you in mind",
+                why1Title: "Privacy First",
+                why1Desc: "Your data never leaves your device unless you choose to backup",
+                why2Title: "Simple to Use",
+                why2Desc: "Intuitive design that gets out of your way",
+                why3Title: "Smart Insights",
+                why3Desc: "Understand your spending patterns at a glance",
+                why4Title: "Cross Platform",
+                why4Desc: "Use on both iPhone and Android seamlessly",
+                screenshotsTitle: "Beautiful by Design",
+                screenshotsDesc: "A clean, intuitive interface that makes managing money effortless",
+                screenshot1: "Home Screen",
+                screenshot2: "Statistics",
+                screenshot3: "Accounts",
+                screenshot4: "Settings",
+                ctaTitle: "Download Money Tracker",
+                ctaDesc: "Start tracking your expenses today and take the first step towards financial freedom.",
+                footerCopy: "2025 Money Tracker. All rights reserved.",
+                navFeatures: "Features",
+                navWhy: "Why Money Tracker",
+                navScreenshots: "Screenshots"
+            },
+            ja: {
+                badge: "無料",
+                badgeSub: "月額料金なし",
+                heroTitle: "お金の管理が<br>簡単に",
+                heroDesc: "プライバシー第一の美しい支出トラッカー。支出習慣を理解し、より多くのお金を節約できます。",
+                heroCTA: "ダウンロード",
+                heroCTA2: "App Store",
+                heroStat1: "100%",
+                heroStat1Label: "無料",
+                heroStat2: "プライベート",
+                heroStat2Label: "データはあなただけのもの",
+                heroStat3: "2",
+                heroStat3Label: "プラットフォーム",
+                heroStat4: "10以上",
+                heroStat4Label: "言語",
+                featuresTitle: "必要なすべて",
+                featuresDesc: "財務管理を強化するために設計された強力なツール",
+                feature1Title: "簡単な取引記録",
+                feature1Desc: "収入と支出を素早く記録。スマートなカテゴリ分類で数秒で取引を追加。",
+                feature2Title: "美しい分析",
+                feature2Desc: "美しいチャートで支出を視覚化。習慣を理解するための週間・月間・年間トレンド。",
+                feature3Title: "安全でプライベート",
+                feature3Desc: "Face ID、Touch ID、またはPINでデータを保護。財務情報は完全にプライベートに。",
+                feature4Title: "多言語対応",
+                feature4Desc: "10以上の言語で利用可能。お好みの言語に切り替えることができます。",
+                feature5Title: "美しいテーマ",
+                feature5Desc: "ライトモード、ダークモード、またはシステム設定に従うを選択。",
+                feature6Title: "複数アカウント",
+                feature6Desc: "すべてのアカウントを一か所で管理。現金、銀行口座、クレジットカードなど。",
+                whyTitle: "Money Trackerの理由",
+                whyDesc: "あなたのためにデザインされました",
+                why1Title: "プライバシー優先",
+                why1Desc: "バックアップを選択しない限り、データはデバイスから離れしません",
+                why2Title: "使いやすい",
+                why2Desc: "邪魔にならない直感的なデザイン",
+                why3Title: "スマートなインサイト",
+                why3Desc: "支出パターンを一目で理解",
+                why4Title: "クロスプラットフォーム",
+                why4Desc: "iPhoneとAndroidの両方でシームレスに使用",
+                screenshotsTitle: "美しさのデザイン",
+                screenshotsDesc: "お金の管理を effortless にする清潔で直感的なインターフェース",
+                screenshot1: "ホーム画面",
+                screenshot2: "統計",
+                screenshot3: "アカウント",
+                screenshot4: "設定",
+                ctaTitle: "Money Trackerをダウンロード",
+                ctaDesc: "今日から支出の追跡を始めて、財務自由への第一歩を踏み出しましょう。",
+                footerCopy: "2025 Money Tracker. 無断複写・転載を禁じます。",
+                navFeatures: "機能",
+                navWhy: "選ばれる理由",
+                navScreenshots: "スクリーンショット"
+            },
+            ko: {
+                badge: "무료",
+                badgeSub: "구독료 없음",
+                heroTitle: "재정 관리<br>손쉽게",
+                heroDesc: "隐私 우선의 아름다운 지출 트래커. 지출 습관을 이해하고 더 많은 돈을 절약할 수 있습니다.",
+                heroCTA: "다운로드",
+                heroCTA2: "App Store",
+                heroStat1: "100%",
+                heroStat1Label: "무료",
+                heroStat2: "프라이버시",
+                heroStat2Label: "당신의 데이터는 당신のもの",
+                heroStat3: "2",
+                heroStat3Label: "플랫폼",
+                heroStat4: "10개 이상",
+                heroStat4Label: "언어",
+                featuresTitle: "필요한 모든 것",
+                featuresDesc: "재정 생활을 통제하는 데 도움이 되도록 설계된 강력한 도구",
+                feature1Title: "쉬운 거래 기록",
+                feature1Desc: "수입과 지출을 빠르게 기록. 스마트 분류로 몇 초 만에 거래 추가.",
+                feature2Title: "아름다운 분석",
+                feature2Desc: "아름다운 차트로 지출을 시각화. 습관을 이해하기 위한 주간, 월간, 연간 트렌드.",
+                feature3Title: "안전하고 프라이버시",
+                feature3Desc: "Face ID, Touch ID 또는 PIN으로 데이터 보호. 재정 정보가 완전히 비공개로 유지됩니다.",
+                feature4Title: "다국어 지원",
+                feature4Desc: "10개 이상의 언어에서 사용 가능. 선호하는 언어로 즉시 전환.",
+                feature5Title: "아름다운 테마",
+                feature5Desc: "라이트 모드, 다크 모드 또는 시스템 설정 따르기 선택.",
+                feature6Title: "다중 계정",
+                feature6Desc: "모든 계정을 한 곳에서 관리. 현금, 은행 계좌, 신용 카드 등.",
+                whyTitle: "Money Tracker가 좋은 이유",
+                whyDesc: "당신을 위해 설계됨",
+                why1Title: "프라이버시 우선",
+                why1Desc: "백업을 선택하지 않는 한 데이터가 기기를 떠나지 않습니다",
+                why2Title: "사용하기 쉬움",
+                why2Desc: "방해가 되지 않는 직관적인 디자인",
+                why3Title: "스마트한 인사이트",
+                why3Desc: "지출 패턴을 한눈에 이해",
+                why4Title: "크로스 플랫폼",
+                why4Desc: "iPhone과 Android 모두에서 원활하게 사용",
+                screenshotsTitle: "아름다운 디자인",
+                screenshotsDesc: "돈 관리를 쉽게 만드는 깨끗하고 직관적인 인터페이스",
+                screenshot1: "홈 화면",
+                screenshot2: "통계",
+                screenshot3: "계정",
+                screenshot4: "설정",
+                ctaTitle: "Money Tracker 다운로드",
+                ctaDesc: "오늘부터 지출 추적을 시작하고 재정 자유의 첫걸음을踏み出しましょう.",
+                footerCopy: "2025 Money Tracker. 모든 권리 보유.",
+                navFeatures: "기능",
+                navWhy: "왜 Money Tracker인가",
+                navScreenshots: "스크린샷"
+            },
+            zhHant: {
+                badge: "免費",
+                badgeSub: "無訂閱費用",
+                heroTitle: "輕鬆掌握<br>個人財務",
+                heroDesc: "一款注重隱私的精美支出追蹤器，幫助您了解消費習慣並省下更多錢。",
+                heroCTA: "下載",
+                heroCTA2: "App Store",
+                heroStat1: "100%",
+                heroStat1Label: "完全免費",
+                heroStat2: "隱私",
+                heroStat2Label: "您的資料只屬於您",
+                heroStat3: "2",
+                heroStat3Label: "平台",
+                heroStat4: "10+",
+                heroStat4Label: "語言",
+                featuresTitle: "您需要的一切",
+                featuresDesc: "強大的工具，助您掌控財務生活",
+                feature1Title: "簡單記帳",
+                feature1Desc: "快速記錄收入和支出。透過智能分類功能，幾秒鐘即可新增交易。",
+                feature2Title: "精美分析",
+                feature2Desc: "以精美圖表視覺化您的支出。查看每週、每月和每年的趨勢以了解您的習慣。",
+                feature3Title: "安全隱私",
+                feature3Desc: "使用 Face ID、Touch ID 或 PIN 保護您的資料。您的財務資訊完全保密。",
+                feature4Title: "多語言",
+                feature4Desc: "支援 10 種以上語言。可立即切換到您偏好的語言。",
+                feature5Title: "精美主題",
+                feature5Desc: "選擇淺色模式、深色模式或跟隨系統設定。",
+                feature6Title: "多帳戶",
+                feature6Desc: "在一處管理所有帳戶。現金、銀行帳戶、信用卡等。",
+                whyTitle: "為何選擇 Money Tracker？",
+                whyDesc: "為您量身打造",
+                why1Title: "隱私優先",
+                why1Desc: "除非您選擇備份，否則您的資料絕不會離開您的裝置",
+                why2Title: "簡單易用",
+                why2Desc: "不打擾您的直觀設計",
+                why3Title: "智能洞察",
+                why3Desc: "一眼看懂您的消費模式",
+                why4Title: "跨平台",
+                why4Desc: "在 iPhone 和 Android 上無縫使用",
+                screenshotsTitle: "精美設計",
+                screenshotsDesc: "讓金錢管理變得輕而易舉的簡潔直觀介面",
+                screenshot1: "主頁面",
+                screenshot2: "統計",
+                screenshot3: "帳戶",
+                screenshot4: "設定",
+                ctaTitle: "下載 Money Tracker",
+                ctaDesc: "今天就開始追蹤支出，踏出財務自由的第一步。",
+                footerCopy: "2025 Money Tracker. 版權所有。",
+                navFeatures: "功能特色",
+                navWhy: "為何選擇",
+                navScreenshots: "截圖展示"
+            },
+            zhHans: {
+                badge: "免费",
+                badgeSub: "无订阅费用",
+                heroTitle: "轻松掌握<br>个人财务",
+                heroDesc: "一款注重隐私的精美支出追踪器，帮助您了解消费习惯并省下更多钱。",
+                heroCTA: "下载",
+                heroCTA2: "App Store",
+                heroStat1: "100%",
+                heroStat1Label: "完全免费",
+                heroStat2: "隐私",
+                heroStat2Label: "您的数据只属于您",
+                heroStat3: "2",
+                heroStat3Label: "平台",
+                heroStat4: "10+",
+                heroStat4Label: "语言",
+                featuresTitle: "您需要的一切",
+                featuresDesc: "强大的工具，助您掌控财务生活",
+                feature1Title: "简单记账",
+                feature1Desc: "快速记录收入和支出。通过智能分类功能，几秒钟即可新增交易。",
+                feature2Title: "精美分析",
+                feature2Desc: "以精美图表可视化您的支出。查看每周、每月和每年的趋势以了解您的习惯。",
+                feature3Title: "安全隐私",
+                feature3Desc: "使用 Face ID、Touch ID 或 PIN 保护您的数据。您的财务信息完全保密。",
+                feature4Title: "多语言",
+                feature4Desc: "支持 10 种以上语言。可立即切换到您偏好的语言。",
+                feature5Title: "精美主题",
+                feature5Desc: "选择浅色模式、深色模式或跟随系统设置。",
+                feature6Title: "多账户",
+                feature6Desc: "在一处管理所有账户。现金、银行账户、信用卡等。",
+                whyTitle: "为何选择 Money Tracker？",
+                whyDesc: "为您量身打造",
+                why1Title: "隐私优先",
+                why1Desc: "除非您选择备份，否则您的数据绝不会离开您的设备",
+                why2Title: "简单易用",
+                why2Desc: "不打扰您的直观设计",
+                why3Title: "智能洞察",
+                why3Desc: "一眼看懂您的消费模式",
+                why4Title: "跨平台",
+                why4Desc: "在 iPhone 和 Android 上无缝使用",
+                screenshotsTitle: "精美设计",
+                screenshotsDesc: "让金钱管理变得轻而易举的简洁直观界面",
+                screenshot1: "主页",
+                screenshot2: "统计",
+                screenshot3: "账户",
+                screenshot4: "设置",
+                ctaTitle: "下载 Money Tracker",
+                ctaDesc: "今天就开始追踪支出，踏出财务自由的第一步。",
+                footerCopy: "2025 Money Tracker. 版权所有。",
+                navFeatures: "功能特色",
+                navWhy: "为何选择",
+                navScreenshots: "截图展示"
+            },
+            fr: {
+                badge: "GRATUIT",
+                badgeSub: "Sans abonnement",
+                heroTitle: "Maîtrisez vos<br>finances facilement",
+                heroDesc: "Un traiteur de dépenses beau et axé sur la confidentialité qui vous aide à comprendre vos habitudes de dépenses et à économiser plus d'argent.",
+                heroCTA: "Télécharger sur",
+                heroCTA2: "l'App Store",
+                heroStat1: "100%",
+                heroStat1Label: "Gratuit",
+                heroStat2: "Privé",
+                heroStat2Label: "Vos données vous appartiennent",
+                heroStat3: "2",
+                heroStat3Label: "Plateformes",
+                heroStat4: "10+",
+                heroStat4Label: "Langues",
+                featuresTitle: "Tout ce dont vous avez besoin",
+                featuresDesc: "Des outils puissants conçus pour vous aider à reprendre le contrôle de votre vie financière",
+                feature1Title: "Suivi de transactions facile",
+                feature1Desc: "Enregistrez rapidement les revenus et les dépenses. Ajoutez des transactions en quelques secondes avec une catégorisation intelligente.",
+                feature2Title: "Analyses belles",
+                feature2Desc: "Visualisez vos dépenses avec de superbes graphiques. Voyez les tendances hebdomadaires, mensuelles et annuelles.",
+                feature3Title: "Sécurisé et privé",
+                feature3Desc: "Protégez vos données avec Face ID, Touch ID ou PIN. Vos informations financières restent complètement privées.",
+                feature4Title: "Multilingue",
+                feature4Desc: "Disponible dans plus de 10 langues. Basculez instantanément vers la langue de votre choix.",
+                feature5Title: "Thèmes beaux",
+                feature5Desc: "Choisissez le mode clair, le mode sombre ou laissez suivre les paramètres système.",
+                feature6Title: "Multi-comptes",
+                feature6Desc: "Gérez tous vos comptes en un seul endroit. Espèces, comptes bancaires, cartes de crédit et plus.",
+                whyTitle: "Pourquoi Money Tracker ?",
+                whyDesc: "Conçu avec vous à l'esprit",
+                why1Title: "Confidentialité avant tout",
+                why1Desc: "Vos données ne quittent jamais votre appareil sauf si vous choisissez de les sauvegarder",
+                why2Title: "Simple à utiliser",
+                why2Desc: "Design intuitif qui ne vous gêne pas",
+                why3Title: "Insights intelligents",
+                why3Desc: "Comprenez vos habitudes de dépenses en un coup d'œil",
+                why4Title: "Multi-plateforme",
+                why4Desc: "Utilisez sur iPhone et Android de manière transparente",
+                screenshotsTitle: "Joli par conception",
+                screenshotsDesc: "Une interface propre et intuitive qui rend la gestion de l'argent sans effort",
+                screenshot1: "Écran d'accueil",
+                screenshot2: "Statistiques",
+                screenshot3: "Comptes",
+                screenshot4: "Paramètres",
+                ctaTitle: "Télécharger Money Tracker",
+                ctaDesc: "Commencez à suivre vos dépenses aujourd'hui et faites le premier pas vers la liberté financière.",
+                footerCopy: "2025 Money Tracker. Tous droits réservés.",
+                navFeatures: "Fonctionnalités",
+                navWhy: "Pourquoi Money Tracker",
+                navScreenshots: "Captures d'écran"
+            },
+            de: {
+                badge: "KOSTENLOS",
+                badgeSub: "Kein Abo erforderlich",
+                heroTitle: "Meistern Sie Ihre<br>Finanzen leicht",
+                heroDesc: "Ein schöner, datenschutzorientierter Ausgaben-Tracker, der Ihnen hilft, Ihre Ausgabengewohnheiten zu verstehen und mehr Geld zu sparen.",
+                heroCTA: "Herunterladen auf",
+                heroCTA2: "App Store",
+                heroStat1: "100%",
+                heroStat1Label: "Kostenlos",
+                heroStat2: "Privat",
+                heroStat2Label: "Ihre Daten gehören Ihnen",
+                heroStat3: "2",
+                heroStat3Label: "Plattformen",
+                heroStat4: "10+",
+                heroStat4Label: "Sprachen",
+                featuresTitle: "Alles was Sie brauchen",
+                featuresDesc: "Leistungsstarke Werkzeuge, die Ihnen helfen, die Kontrolle über Ihr Finanzleben zu übernehmen",
+                feature1Title: "Einfache Transaktionsverfolgung",
+                feature1Desc: "Erfassen Sie schnell Einnahmen und Ausgaben. Fügen Sie Transaktionen in Sekundenschnelle mit intelligenter Kategorisierung hinzu.",
+                feature2Title: "Schöne Analysen",
+                feature2Desc: "Visualisieren Sie Ihre Ausgaben mit atemberaubenden Diagrammen. Sehen Sie wöchentliche, monatliche und jährliche Trends.",
+                feature3Title: "Sicher & Privat",
+                feature3Desc: "Schützen Sie Ihre Daten mit Face ID, Touch ID oder PIN. Ihre Finanzdaten bleiben vollständig privat.",
+                feature4Title: "Mehrsprachig",
+                feature4Desc: "Verfügbar in über 10 Sprachen. Wechseln Sie sofort zu Ihrer bevorzugten Sprache.",
+                feature5Title: "Schöne Designs",
+                feature5Desc: "Wählen Sie Hellmodus, Dunkelmodus oder folgen Sie den Systemeinstellungen.",
+                feature6Title: "Mehrere Konten",
+                feature6Desc: "Verwalten Sie alle Ihre Konten an einem Ort. Bargeld, Bankkonten, Kreditkarten und mehr.",
+                whyTitle: "Warum Money Tracker?",
+                whyDesc: "Mit Ihnen im Sinn entworfen",
+                why1Title: "Datenschutz zuerst",
+                why1Desc: "Ihre Daten verlassen Ihr Gerät nie, es sei denn, Sie wählen ein Backup",
+                why2Title: "Einfach zu bedienen",
+                why2Desc: "Intuitives Design, das Ihnen nicht im Weg steht",
+                why3Title: "Smarte Einblicke",
+                why3Desc: "Verstehen Sie Ihre Ausgabemuster auf einen Blick",
+                why4Title: "Plattformübergreifend",
+                why4Desc: "Nutzen Sie es nahtlos auf iPhone und Android",
+                screenshotsTitle: "Schön gestaltet",
+                screenshotsDesc: "Eine saubere, intuitive Oberfläche, die die Geldverwaltung mühelos macht",
+                screenshot1: "Startbildschirm",
+                screenshot2: "Statistiken",
+                screenshot3: "Konten",
+                screenshot4: "Einstellungen",
+                ctaTitle: "Money Tracker herunterladen",
+                ctaDesc: "Beginnen Sie noch heute mit der Verfolgung Ihrer Ausgaben und machen Sie den ersten Schritt zur finanziellen Freiheit.",
+                footerCopy: "2025 Money Tracker. Alle Rechte vorbehalten.",
+                navFeatures: "Funktionen",
+                navWhy: "Warum Money Tracker",
+                navScreenshots: "Screenshots"
+            },
+            es: {
+                badge: "GRATIS",
+                badgeSub: "Sin suscripción",
+                heroTitle: "Domina tus<br>finanzas fácilmente",
+                heroDesc: "Un rastreador de gastos hermoso y privado que te ayuda a entender tus hábitos de gasto y ahorrar más dinero.",
+                heroCTA: "Descargar en",
+                heroCTA2: "App Store",
+                heroStat1: "100%",
+                heroStat1Label: "Gratis",
+                heroStat2: "Privado",
+                heroStat2Label: "Tus datos son tuyos",
+                heroStat3: "2",
+                heroStat3Label: "Plataformas",
+                heroStat4: "10+",
+                heroStat4Label: "Idiomas",
+                featuresTitle: "Todo lo que necesitas",
+                featuresDesc: "Herramientas poderosas diseñadas para ayudarte a tomar el control de tu vida financiera",
+                feature1Title: "Seguimiento fácil de transacciones",
+                feature1Desc: "Registra rápidamente ingresos y gastos. Agrega transacciones en segundos con categorización inteligente.",
+                feature2Title: "Analíticas hermosas",
+                feature2Desc: "Visualiza tus gastos con gráficos impresionantes. Ve tendencias semanales, mensuales y anuales.",
+                feature3Title: "Seguro y privado",
+                feature3Desc: "Protege tus datos con Face ID, Touch ID o PIN. Tu información financiera permanece completamente privada.",
+                feature4Title: "Multidioma",
+                feature4Desc: "Disponible en más de 10 idiomas. Cambia instantáneamente a tu idioma preferido.",
+                feature5Title: "Temas hermosos",
+                feature5Desc: "Elige modo claro, modo oscuro o sigue la configuración del sistema.",
+                feature6Title: "Multi-cuenta",
+                feature6Desc: "Gestiona todas tus cuentas en un solo lugar. Efectivo, cuentas bancarias, tarjetas de crédito y más.",
+                whyTitle: "¿Por qué Money Tracker?",
+                whyDesc: "Diseñado pensando en ti",
+                why1Title: "Privacidad primero",
+                why1Desc: "Tus datos nunca abandonan tu dispositivo a menos que elijas hacer una copia de seguridad",
+                why2Title: "Fácil de usar",
+                why2Desc: "Diseño intuitivo que no te estorba",
+                why3Title: "Ideas inteligentes",
+                why3Desc: "Entiende tus patrones de gasto de un vistazo",
+                why4Title: "Multiplataforma",
+                why4Desc: "Usa sin problemas en iPhone y Android",
+                screenshotsTitle: "Hermoso por diseño",
+                screenshotsDesc: "Una interfaz limpia e intuitiva que hace que gestionar el dinero sea sin esfuerzo",
+                screenshot1: "Pantalla de inicio",
+                screenshot2: "Estadísticas",
+                screenshot3: "Cuentas",
+                screenshot4: "Configuración",
+                ctaTitle: "Descargar Money Tracker",
+                ctaDesc: "Comienza a rastrear tus gastos hoy y da el primer paso hacia la libertad financiera.",
+                footerCopy: "2025 Money Tracker. Todos los derechos reservados.",
+                navFeatures: "Características",
+                navWhy: "Por qué Money Tracker",
+                navScreenshots: "Capturas de pantalla"
+            },
+            pt: {
+                badge: "GRÁTIS",
+                badgeSub: "Sem assinatura",
+                heroTitle: "Controle suas<br>finanças com facilidade",
+                heroDesc: "Um rastreador de despesas bonito e privado que ajuda você a entender seus hábitos de gasto e economizar mais dinheiro.",
+                heroCTA: "Baixar na",
+                heroCTA2: "App Store",
+                heroStat1: "100%",
+                heroStat1Label: "Grátis",
+                heroStat2: "Privado",
+                heroStat2Label: "Seus dados são seus",
+                heroStat3: "2",
+                heroStat3Label: "Plataformas",
+                heroStat4: "10+",
+                heroStat4Label: "Idiomas",
+                featuresTitle: "Tudo que você precisa",
+                featuresDesc: "Ferramentas poderosas projetadas para ajudá-lo a assumir o controle de sua vida financeira",
+                feature1Title: "Rastreamento fácil de transações",
+                feature1Desc: "Registre rapidamente receitas e despesas. Adicione transações em segundos com categorização inteligente.",
+                feature2Title: "Análises bonitas",
+                feature2Desc: "Visualize seus gastos com gráficos impressionantes. Veja tendências semanais, mensais e anuais.",
+                feature3Title: "Seguro e privado",
+                feature3Desc: "Proteja seus dados com Face ID, Touch ID ou PIN. Suas informações financeiras permanecem completamente privadas.",
+                feature4Title: "Multi-idioma",
+                feature4Desc: "Disponível em mais de 10 idiomas. Alterne instantaneamente para o idioma de sua preferência.",
+                feature5Title: "Temas bonitos",
+                feature5Desc: "Escolha modo claro, modo escuro ou siga as configurações do sistema.",
+                feature6Title: "Multi-conta",
+                feature6Desc: "Gerencie todas as suas contas em um só lugar. Dinheiro, contas bancárias, cartões de crédito e mais.",
+                whyTitle: "Por que Money Tracker?",
+                whyDesc: "Projetado pensando em você",
+                why1Title: "Privacidade em primeiro lugar",
+                why1Desc: "Seus dados nunca saem do seu dispositivo a menos que você escolha fazer backup",
+                why2Title: "Fácil de usar",
+                why2Desc: "Design intuitivo que não atrapalha",
+                why3Title: "Insights inteligentes",
+                why3Desc: "Entenda seus padrões de gastos com um olhar",
+                why4Title: "Multiplataforma",
+                why4Desc: "Use sem problemas no iPhone e Android",
+                screenshotsTitle: "Bonito por design",
+                screenshotsDesc: "Uma interface limpa e intuitiva que torna o gerenciamento de dinheiro sem esforço",
+                screenshot1: "Tela inicial",
+                screenshot2: "Estatísticas",
+                screenshot3: "Contas",
+                screenshot4: "Configurações",
+                ctaTitle: "Baixar Money Tracker",
+                ctaDesc: "Comece a rastrear suas despesas hoje e dê o primeiro passo em direção à liberdade financeira.",
+                footerCopy: "2025 Money Tracker. Todos os direitos reservados.",
+                navFeatures: "Recursos",
+                navWhy: "Por que Money Tracker",
+                navScreenshots: "Capturas de tela"
+            },
+            it: {
+                badge: "GRATIS",
+                badgeSub: "Senza abbonamento",
+                heroTitle: "Prendi il controllo<br>dei tuoi soldi",
+                heroDesc: "Un tracker delle spese bellissimo e privato che ti aiuta a capire le tue abitudini di spesa e risparmiare più denaro.",
+                heroCTA: "Scarica su",
+                heroCTA2: "App Store",
+                heroStat1: "100%",
+                heroStat1Label: "Gratis",
+                heroStat2: "Privato",
+                heroStat2Label: "I tuoi dati sono tuoi",
+                heroStat3: "2",
+                heroStat3Label: "Piattaforme",
+                heroStat4: "10+",
+                heroStat4Label: "Lingue",
+                featuresTitle: "Tutto ciò di cui hai bisogno",
+                featuresDesc: "Strumenti potenti progettati per aiutarti a prendere il controllo della tua vita finanziaria",
+                feature1Title: "Facile tracciamento transazioni",
+                feature1Desc: "Registra rapidamente entrate e uscite. Aggiungi transazioni in pochi secondi con categorizzazione intelligente.",
+                feature2Title: "Analisi bellissime",
+                feature2Desc: "Visualizza le tue spese con grafici stupendi. Vedi tendenze settimanali, mensili e annuali.",
+                feature3Title: "Sicuro e privato",
+                feature3Desc: "Proteggi i tuoi dati con Face ID, Touch ID o PIN. Le tue informazioni finanziarie rimangono completamente private.",
+                feature4Title: "Multilingua",
+                feature4Desc: "Disponibile in più di 10 lingue. Passa istantaneamente alla lingua che preferisci.",
+                feature5Title: "Temi belli",
+                feature5Desc: "Scegli modalità chiara, scura o segui le impostazioni di sistema.",
+                feature6Title: "Multi-conto",
+                feature6Desc: "Gestisci tutti i tuoi conti in un unico posto. Contanti, conti bancari, carte di credito e altro.",
+                whyTitle: "Perché Money Tracker?",
+                whyDesc: "Progettato pensando a te",
+                why1Title: "Privacy prima di tutto",
+                why1Desc: "I tuoi dati non lasciano mai il tuo dispositivo a meno che tu non scelga di eseguire il backup",
+                why2Title: "Facile da usare",
+                why2Desc: "Design intuitivo che non ti intralcia",
+                why3Title: "Insight intelligenti",
+                why3Desc: "Capisci i tuoi schemi di spesa a colpo d'occhio",
+                why4Title: "Multi-piattaforma",
+                why4Desc: "Usalo senza problemi su iPhone e Android",
+                screenshotsTitle: "Bello per design",
+                screenshotsDesc: "Un'interfaccia pulita e intuitiva che rende la gestione del denaro senza sforzo",
+                screenshot1: "Schermata Home",
+                screenshot2: "Statistiche",
+                screenshot3: "Conti",
+                screenshot4: "Impostazioni",
+                ctaTitle: "Scarica Money Tracker",
+                ctaDesc: "Inizia a tracciare le tue spese oggi e fai il primo passo verso la libertà finanziaria.",
+                footerCopy: "2025 Money Tracker. Tutti i diritti riservati.",
+                navFeatures: "Funzionalità",
+                navWhy: "Perché Money Tracker",
+                navScreenshots: "Screenshot"
+            },
+            vi: {
+                badge: "MIỄN PHÍ",
+                badgeSub: "Không đăng ký",
+                heroTitle: "Làm chủ tài chính<br>một cách dễ dàng",
+                heroDesc: "Một ứng dụng theo dõi chi tiêu đẹp và bảo mật giúp bạn hiểu thói quen chi tiêu và tiết kiệm nhiều tiền hơn.",
+                heroCTA: "Tải về",
+                heroCTA2: "App Store",
+                heroStat1: "100%",
+                heroStat1Label: "Miễn phí",
+                heroStat2: "Riêng tư",
+                heroStat2Label: "Dữ liệu của bạn là của bạn",
+                heroStat3: "2",
+                heroStat3Label: "Nền tảng",
+                heroStat4: "10+",
+                heroStat4Label: "Ngôn ngữ",
+                featuresTitle: "Tất cả những gì bạn cần",
+                featuresDesc: "Công cụ mạnh mẽ được thiết kế để giúp bạn kiểm soát cuộc sống tài chính",
+                feature1Title: "Theo dõi giao dịch dễ dàng",
+                feature1Desc: "Ghi nhận thu nhập và chi tiêu nhanh chóng. Thêm giao dịch trong vài giây với phân loại thông minh.",
+                feature2Title: "Phân tích đẹp",
+                feature2Desc: "Trực quan hóa chi tiêu với biểu đồ tuyệt đẹp. Xem xu hướng hàng tuần, hàng tháng và hàng năm.",
+                feature3Title: "Bảo mật và riêng tư",
+                feature3Desc: "Bảo vệ dữ liệu của bạn bằng Face ID, Touch ID hoặc PIN. Thông tin tài chính của bạn hoàn toàn riêng tư.",
+                feature4Title: "Đa ngôn ngữ",
+                feature4Desc: "Có sẵn bằng hơn 10 ngôn ngữ. Chuyển đổi ngay lập tức sang ngôn ngữ bạn muốn.",
+                feature5Title: "Giao diện đẹp",
+                feature5Desc: "Chọn chế độ sáng, tối hoặc theo cài đặt hệ thống.",
+                feature6Title: "Nhiều tài khoản",
+                feature6Desc: "Quản lý tất cả tài khoản ở một nơi. Tiền mặt, tài khoản ngân hàng, thẻ tín dụng và hơn thế nữa.",
+                whyTitle: "Tại sao chọn Money Tracker?",
+                whyDesc: "Được thiết kế dành cho bạn",
+                why1Title: "Quyền riêng tư trước",
+                why1Desc: "Dữ liệu của bạn không bao giờ rời khỏi thiết bị trừ khi bạn chọn sao lưu",
+                why2Title: "Dễ sử dụng",
+                why2Desc: "Thiết kế trực quan không cản trở bạn",
+                why3Title: "Hiểu biết thông minh",
+                why3Desc: "Hiểu mẫu chi tiêu của bạn trong nháy mắt",
+                why4Title: "Đa nền tảng",
+                why4Desc: "Sử dụng liền mạch trên cả iPhone và Android",
+                screenshotsTitle: "Đẹp từ thiết kế",
+                screenshotsDesc: "Giao diện sạch sẽ, trực quan giúp quản lý tiền bạc dễ dàng",
+                screenshot1: "Màn hình chính",
+                screenshot2: "Thống kê",
+                screenshot3: "Tài khoản",
+                screenshot4: "Cài đặt",
+                ctaTitle: "Tải Money Tracker",
+                ctaDesc: "Bắt đầu theo dõi chi tiêu ngay hôm nay và bước đầu tiên hướng tới tự do tài chính.",
+                footerCopy: "2025 Money Tracker. Bảo lưu mọi quyền.",
+                navFeatures: "Tính năng",
+                navWhy: "Tại sao chọn",
+                navScreenshots: "Ảnh màn hình"
+            },
+            id: {
+                badge: "GRATIS",
+                badgeSub: "Tanpa langganan",
+                heroTitle: "Kuasai keuangan<br>dengan mudah",
+                heroDesc: "Pelacak pengeluaran yang indah dan pribadi yang membantu Anda memahami kebiasaan pengeluaran dan menghemat lebih banyak uang.",
+                heroCTA: "Unduh di",
+                heroCTA2: "App Store",
+                heroStat1: "100%",
+                heroStat1Label: "Gratis",
+                heroStat2: "Privat",
+                heroStat2Label: "Data Anda adalah milik Anda",
+                heroStat3: "2",
+                heroStat3Label: "Platform",
+                heroStat4: "10+",
+                heroStat4Label: "Bahasa",
+                featuresTitle: "Semua yang Anda butuhkan",
+                featuresDesc: "Alat canggih yang dirancang untuk membantu Anda mengambil kendali kehidupan finansial",
+                feature1Title: "Pencatatan transaksi mudah",
+                feature1Desc: "Catat pemasukan dan pengeluaran dengan cepat. Tambahkan transaksi dalam hitungan detik dengan kategorisasi cerdas.",
+                feature2Title: "Analitik indah",
+                feature2Desc: "Visualisasikan pengeluaran Anda dengan grafik yang menakjubkan. Lihat tren mingguan, bulanan, dan tahunan.",
+                feature3Title: "Aman dan privat",
+                feature3Desc: "Lindungi data Anda dengan Face ID, Touch ID atau PIN. Informasi finansial Anda tetap sepenuhnya privat.",
+                feature4Title: "Multi-bahasa",
+                feature4Desc: "Tersedia dalam lebih dari 10 bahasa. Beralih segera ke bahasa pilihan Anda.",
+                feature5Title: "Tema indah",
+                feature5Desc: "Pilih mode terang, gelap, atau ikuti pengaturan sistem.",
+                feature6Title: "Multi-akun",
+                feature6Desc: "Kelola semua akun Anda di satu tempat. Tunai, rekening bank, kartu kredit, dan lainnya.",
+                whyTitle: "Mengapa Money Tracker?",
+                whyDesc: "Dirancang dengan mempertimbangkan Anda",
+                why1Title: "Privasi utama",
+                why1Desc: "Data Anda tidak pernah meninggalkan perangkat kecuali Anda memilih untuk mencadangkan",
+                why2Title: "Mudah digunakan",
+                why2Desc: "Desain intuitif yang tidak menghalangi",
+                why3Title: "Wawasan cerdas",
+                why3Desc: "Pahami pola pengeluaran Anda sekilas",
+                why4Title: "Lintas platform",
+                why4Desc: "Gunakan dengan mulus di iPhone dan Android",
+                screenshotsTitle: "Indah dari desain",
+                screenshotsDesc: "Antarmuka yang bersih dan intuitif yang membuat pengelolaan uang menjadi mudah",
+                screenshot1: "Layar utama",
+                screenshot2: "Statistik",
+                screenshot3: "Akun",
+                screenshot4: "Pengaturan",
+                ctaTitle: "Unduh Money Tracker",
+                ctaDesc: "Mulai lacak pengeluaran hari ini dan langkah pertama menuju kebebasan finansial.",
+                footerCopy: "2025 Money Tracker. Semua hak dilindungi.",
+                navFeatures: "Fitur",
+                navWhy: "Mengapa Money Tracker",
+                navScreenshots: "Tangkapan layar"
+            },
+            ar: {
+                badge: "مجاني",
+                badgeSub: "بدون اشتراك",
+                heroTitle: "تحكم في أموالك<br>بسهولة",
+                heroDesc: "متتبع نفقات جميل يحمي خصوصيتك ويساعدك على فهم عادات الإنفاق وتوفير المزيد من المال.",
+                heroCTA: "تحميل من",
+                heroCTA2: "App Store",
+                heroStat1: "100%",
+                heroStat1Label: "مجاني",
+                heroStat2: "خصوصي",
+                heroStat2Label: "بياناتك ملك لك",
+                heroStat3: "2",
+                heroStat3Label: "منصات",
+                heroStat4: "10+",
+                heroStat4Label: "لغات",
+                featuresTitle: "كل ما تحتاجه",
+                featuresDesc: "أدوات قوية مصممة لمساعدتك على التحكم في حياتك المالية",
+                feature1Title: "تتبع المعاملات بسهولة",
+                feature1Desc: "سجل الدخل والمصروفات بسرعة. أضف معاملات في ثوانٍ مع التصنيف الذكي.",
+                feature2Title: "تحليلات جميلة",
+                feature2Desc: "تصور نفقاتك برسوم بيانية مذهلة. شاهد الاتجاهات الأسبوعية والشهرية والسنوية.",
+                feature3Title: "آمن وخاص",
+                feature3Desc: "احمي بياناتك باستخدام Face ID أو Touch ID أو PIN. تظل معلوماتك المالية خاصة تمامًا.",
+                feature4Title: "متعدد اللغات",
+                languageDesc: "متاح بأكثر من 10 لغات. تبدّل فورًا إلى لغتك المفضلة.",
+                feature5Title: "ثيمات جميلة",
+                feature5Desc: "اختر الوضع الفاتح أو الداكن أو اتبع إعدادات النظام.",
+                feature6Title: "حسابات متعددة",
+                feature6Desc: "إدارة جميع حساباتك في مكان واحد. النقد والحسابات البنكية وبطاقات الائتمان والمزيد.",
+                whyTitle: "لماذا Money Tracker؟",
+                whyDesc: "مصمم مع وضعك في الاعتبار",
+                why1Title: "الخصوصية أولاً",
+                why1Desc: "لا تترك بياناتك جهازك أبدًا إلا إذا اخترت النسخ الاحتياطي",
+                why2Title: "سهل الاستخدام",
+                why2Desc: "تصميم حدسي لا يعيقك",
+                why3Title: "رؤى ذكية",
+                why3Desc: "افهم أنماط إنفاقك بنظرة واحدة",
+                why4Title: "منصات متعددة",
+                why4Desc: "استخدم بسلاسة على iPhone و Android",
+                screenshotsTitle: "جميل بالتصميم",
+                screenshotsDesc: "واجهة نظيفة وبديهية تجعل إدارة المال دون جهد",
+                screenshot1: "الشاشة الرئيسية",
+                screenshot2: "الإحصائيات",
+                screenshot3: "الحسابات",
+                screenshot4: "الإعدادات",
+                ctaTitle: "تحميل Money Tracker",
+                ctaDesc: "ابدأ بتتبع نفقاتك اليوم واتخذ الخطوة الأولى نحو الحرية المالية.",
+                footerCopy: "2025 Money Tracker. جميع الحقوق محفوظة.",
+                navFeatures: "الميزات",
+                navWhy: "لماذا Money Tracker",
+                navScreenshots: "لقطات الشاشة"
+            }
+        };
+
+        // Language codes mapping for browser detection
+        const langCodeMap = {
+            'ja': 'ja',
+            'jp': 'ja',
+            'ko': 'ko',
+            'kr': 'ko',
+            'zh': 'zhHans',
+            'zh-CN': 'zhHans',
+            'zh-TW': 'zhHant',
+            'zh-HK': 'zhHant',
+            'zh-SG': 'zhHans',
+            'fr': 'fr',
+            'de': 'de',
+            'es': 'es',
+            'pt': 'pt',
+            'pt-BR': 'pt',
+            'pt-PT': 'pt',
+            'it': 'it',
+            'vi': 'vi',
+            'id': 'id',
+            'in': 'id',
+            'ar': 'ar',
+            'en': 'en',
+            'en-US': 'en',
+            'en-GB': 'en',
+        };
+
+        // Get current language
+        function getCurrentLang() {
+            const savedLang = localStorage.getItem('language');
+            if (savedLang && translations[savedLang]) {
+                return savedLang;
+            }
+
+            // Detect from browser
+            const browserLang = navigator.language || navigator.userLanguage;
+            if (browserLang) {
+                const shortLang = browserLang.split('-')[0].toLowerCase();
+                const matchedLang = langCodeMap[shortLang] || langCodeMap[browserLang.toLowerCase()];
+                if (matchedLang && translations[matchedLang]) {
+                    return matchedLang;
+                }
+            }
+
+            return 'en'; // Default to English
+        }
+
+        // Apply translation
+        function applyTranslation(lang) {
+            const t = translations[lang];
+            if (!t) return;
+
+            // Update badge
+            document.querySelector('.hero-badge span').textContent = t.badge;
+            document.querySelector('.hero-badge').lastChild.textContent = ' ' + t.badgeSub;
+
+            // Update hero
+            document.getElementById('hero-title').innerHTML = t.heroTitle;
+            document.querySelector('.hero > .hero-container > p').textContent = t.heroDesc;
+
+            // Update hero CTA
+            const heroCTA = document.querySelector('.hero-actions .app-store-btn .app-store-btn-text span:first-child');
+            const heroCTA2 = document.querySelector('.hero-actions .app-store-btn .app-store-btn-text span:last-child');
+            if (heroCTA) heroCTA.textContent = t.heroCTA;
+            if (heroCTA2) heroCTA2.textContent = t.heroCTA2;
+
+            // Update hero stats
+            const heroStats = document.querySelectorAll('.hero-stat');
+            if (heroStats[0]) heroStats[0].querySelector('.hero-stat-value').textContent = t.heroStat1;
+            if (heroStats[0]) heroStats[0].querySelector('.hero-stat-label').textContent = t.heroStat1Label;
+            if (heroStats[1]) heroStats[1].querySelector('.hero-stat-value').textContent = t.heroStat2;
+            if (heroStats[1]) heroStats[1].querySelector('.hero-stat-label').textContent = t.heroStat2Label;
+            if (heroStats[2]) heroStats[2].querySelector('.hero-stat-value').textContent = t.heroStat3;
+            if (heroStats[2]) heroStats[2].querySelector('.hero-stat-label').textContent = t.heroStat3Label;
+            if (heroStats[3]) heroStats[3].querySelector('.hero-stat-value').textContent = t.heroStat4;
+            if (heroStats[3]) heroStats[3].querySelector('.hero-stat-label').textContent = t.heroStat4Label;
+
+            // Update features section
+            document.getElementById('features-title').textContent = t.featuresTitle;
+            document.querySelector('#features > .section-header > p').textContent = t.featuresDesc;
+
+            // Update feature cards
+            const featureCards = document.querySelectorAll('.feature-card');
+            if (featureCards[0]) {
+                featureCards[0].querySelector('h3').textContent = t.feature1Title;
+                featureCards[0].querySelector('p').textContent = t.feature1Desc;
+            }
+            if (featureCards[1]) {
+                featureCards[1].querySelector('h3').textContent = t.feature2Title;
+                featureCards[1].querySelector('p').textContent = t.feature2Desc;
+            }
+            if (featureCards[2]) {
+                featureCards[2].querySelector('h3').textContent = t.feature3Title;
+                featureCards[2].querySelector('p').textContent = t.feature3Desc;
+            }
+            if (featureCards[3]) {
+                featureCards[3].querySelector('h3').textContent = t.feature4Title;
+                featureCards[3].querySelector('p').textContent = t.feature4Desc;
+            }
+            if (featureCards[4]) {
+                featureCards[4].querySelector('h3').textContent = t.feature5Title;
+                featureCards[4].querySelector('p').textContent = t.feature5Desc;
+            }
+            if (featureCards[5]) {
+                featureCards[5].querySelector('h3').textContent = t.feature6Title;
+                featureCards[5].querySelector('p').textContent = t.feature6Desc;
+            }
+
+            // Update why section
+            document.getElementById('why-title').textContent = t.whyTitle;
+            document.querySelector('#why > .section-header > p').textContent = t.whyDesc;
+
+            const whyItems = document.querySelectorAll('.why-item');
+            if (whyItems[0]) {
+                whyItems[0].querySelector('h3').textContent = t.why1Title;
+                whyItems[0].querySelector('p').textContent = t.why1Desc;
+            }
+            if (whyItems[1]) {
+                whyItems[1].querySelector('h3').textContent = t.why2Title;
+                whyItems[1].querySelector('p').textContent = t.why2Desc;
+            }
+            if (whyItems[2]) {
+                whyItems[2].querySelector('h3').textContent = t.why3Title;
+                whyItems[2].querySelector('p').textContent = t.why3Desc;
+            }
+            if (whyItems[3]) {
+                whyItems[3].querySelector('h3').textContent = t.why4Title;
+                whyItems[3].querySelector('p').textContent = t.why4Desc;
+            }
+
+            // Update screenshots section
+            document.getElementById('screenshots-title').textContent = t.screenshotsTitle;
+            document.querySelector('#screenshots > .section-header > p').textContent = t.screenshotsDesc;
+
+            const screenshots = document.querySelectorAll('.screenshot-caption');
+            if (screenshots[0]) screenshots[0].textContent = t.screenshot1;
+            if (screenshots[1]) screenshots[1].textContent = t.screenshot2;
+            if (screenshots[2]) screenshots[2].textContent = t.screenshot3;
+            if (screenshots[3]) screenshots[3].textContent = t.screenshot4;
+
+            // Update CTA section
+            document.getElementById('cta-title').textContent = t.ctaTitle;
+            document.querySelector('.cta-container > p').textContent = t.ctaDesc;
+
+            // Update footer
+            document.querySelector('.footer-copy').textContent = t.footerCopy;
+
+            // Update navigation
+            const navLinks = document.querySelectorAll('.nav-links a');
+            if (navLinks[0]) navLinks[0].textContent = t.navFeatures;
+            if (navLinks[1]) navLinks[1].textContent = t.navWhy;
+            if (navLinks[2]) navLinks[2].textContent = t.navScreenshots;
+
+            // Update language button
+            document.getElementById('current-lang').textContent = lang.toUpperCase();
+
+            // Update active state in dropdown
+            document.querySelectorAll('.lang-option').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            // Save to localStorage
+            localStorage.setItem('language', lang);
+
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+        }
+
+        // Initialize language
+        document.addEventListener('DOMContentLoaded', function() {
+            const initialLang = getCurrentLang();
+            applyTranslation(initialLang);
+
+            // Language selector click handlers
+            document.querySelectorAll('.lang-option').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const lang = this.dataset.lang;
+                    applyTranslation(lang);
+                });
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                const selector = document.querySelector('.lang-selector');
+                if (selector && !selector.contains(e.target)) {
+                    selector.querySelector('.lang-dropdown').classList.remove('active');
                 }
             });
         });
